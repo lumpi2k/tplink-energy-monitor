@@ -1,3 +1,5 @@
+let price = 0.2467;
+
 var dash = {
   deviceId: null,
 
@@ -358,12 +360,18 @@ var dash = {
       return m.month === (moment().month()+1) && m.year === moment().year()
     });
     var energy = ('energy_wh' in monthlyTotal) ? (monthlyTotal.energy_wh/1000) : monthlyTotal.energy
+    var energycost = ('energy_wh' in monthlyTotal) ? (monthlyTotal.energy_wh/1000*price) : monthlyTotal.energy*price 
     $("#total-month").text(energy.toFixed(2));
+    $("#total-month-cost").text(energycost.toFixed(2));
 
     var total = usageData.reduce(function(t, m) {return t + (('energy_wh' in m) ? (m.energy_wh/1000) : m.energy)}, 0);
     var avg = total/usageData.length;
+    var avgcost = total/usageData.length*price;
+    var avgyearlycost = total/usageData.length*price*12;
 
     $("#avg-month").text(avg.toFixed(2));
+    $("#avg-month-cost").text(avgcost.toFixed(2));
+    $("#yearly-cost").text(avgyearlycost.toFixed(2));
   },
 
   refreshPowerState: function(powerState) {
