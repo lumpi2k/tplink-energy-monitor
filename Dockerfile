@@ -1,6 +1,6 @@
-FROM node:8-alpine
+FROM --platform=$BUILDPLATFORM node:alpine
 WORKDIR /opt/tplink-monitor
 COPY . .
 RUN npm install
-EXPOSE 3000
+EXPOSE $PORT
 CMD ["npm", "start"]

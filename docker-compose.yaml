@@ -1,0 +1,11 @@
+version: '3.3'
+services:
+    tplink-energy-monitor:
+        network_mode: host
+        image: docker.io/jbarnett/tplink-energy-monitor
+        build:
+          context: .
+          dockerfile: Dockerfile
+        restart: unless-stopped
+        environment:
+          - "PORT=$PORT"
