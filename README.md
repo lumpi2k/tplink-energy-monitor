@@ -6,9 +6,9 @@ A web based monitoring dashboard displaying energy usage data and statistics for
 
 Written in Node.js + Express, and fully responsive so works well on mobile devices.
 
-<p align="center">
-  <img alt="Screenshot" src="https://jamesbarnett.io/files/tplink-monitor/screenshots/em-res.png">
-</p>
+This project was originally written by [James Barnett](https://github.com/jamesbarnett91/tplink-energy-monitor).
+
+![Screenshot](./assets/monitor.png "Screenshot")
 
 # Features
 - Automatically scans for TP-Link smart plug devices on your local network on server start.
@@ -18,36 +18,56 @@ Written in Node.js + Express, and fully responsive so works well on mobile devic
 - Plug on/off state and uptime.
 - Daily & monthly energy usage totals and averages.
 - Historical daily and monthly energy usage charts.
+- cost figures based on your price per kWh
 
 # Setup
 You can use any of the following methods to get the project running:
 
-### Packaged executable
-The easiest way to run the project is to download one of the packaged executables from the [releases page](https://github.com/jamesbarnett91/tplink-monitor/releases). These are zip files containing a single executable file and some config. Just download the relevant file for your OS (Windows, Linux and MacOS available), extract the zip somewhere and double click executable. Then go to `localhost:3000` in your browser to access the dashboard.
+## Docker Compose
+1. Check out the code on your machine.
 
-### Docker
-Alternatively, you can pull the `jbarnett/tplink-energy-monitor` image and run that.
-Note that because the server needs access to your local network to scan for TP-Link devices, you must run the image using [host networking](https://docs.docker.com/network/host/) e.g.:
-```
-$ docker run -d --network host jbarnett/tplink-energy-monitor
+```sh
+$ git clone https://github.com/lumpi2k/tplink-energy-monitor.git
+$ cd tplink-energy-monitor
 ```
 
-### Node + NPM
+2. copy the .env.example and create your own .env
+
+The ``.env`` file stores the port your app will be reachable and your current price per kWh, if you want to use the energy cost feature.
+
+```sh
+$ cp .env.example .env
+$ nano .env
+```
+3. Use docker compose to build a docker image on your machine and run it
+
+```sh
+$ docker compose build && docker compose up -d
+```
+
+4. Access the App in your browser
+
+The app will be available on port 3000 of your server.
+
+Note that because the server needs access to your local network to scan for TP-Link devices, you must run the image using [host networking](https://docs.docker.com/network/host/). Host networking is currently only available for Linux hosts, so if you want to run the app on your Windows or Mac machine, you should either build your own executable or run it directly via node and ``npm``.
+
+## Node + NPM
 
 To run directly via NPM:
 ```sh
-$ git clone https://github.com/jamesbarnett91/tplink-energy-monitor && cd tplink-energy-monitor
+$ git clone https://github.com/lumpi2k/tplink-energy-monitor.git
+$ cd tplink-energy-monitor
 $ npm install
 $ npm start
 ```
-For hot reload during development, use:
+For hot reload of the node server during development, use:
 
 ```sh
 $ npm run dev
 ```
 
 # Logging
-By default this app will log the current power usage of each plug every minute, and store 24 hours worth of entries (removing the older entries as new ones are added) to files in the root project directory. This log interval, max retention limit and log directory are configurable in the `logger-config.json` file in the root project directory.
+By default this app will log the current power usage of each plug every minute, and store 24 hours worth of entries (removing the older entries as new ones are added) to files in the ``logs`` directory. This log interval, max retention limit and log directory are configurable in the `logger-config.json` file in the root project directory.
 ```
 {
   // Directory path specifying where log files should be stored. It will be created if it doesn't already exist.
