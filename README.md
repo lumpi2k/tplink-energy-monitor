@@ -47,7 +47,7 @@ $ docker compose build && docker compose up -d
 
 4. Access the App in your browser
 
-The app will be available on port 3000 of your server.
+The app will be available on the prot you specified in your .env on your server.
 
 Note that because the server needs access to your local network to scan for TP-Link devices, you must run the image using [host networking](https://docs.docker.com/network/host/). Host networking is currently only available for Linux hosts, so if you want to run the app on your Windows or Mac machine, you should either build your own executable or run it directly via node and ``npm``.
 
@@ -65,6 +65,7 @@ For hot reload of the node server during development, use:
 ```sh
 $ npm run dev
 ```
+By default, the app lives on port 3000 of your machine, so you you should be able to reach it via http://localhost:3000
 
 # Logging
 By default this app will log the current power usage of each plug every minute, and store 24 hours worth of entries (removing the older entries as new ones are added) to files in the ``logs`` directory. This log interval, max retention limit and log directory are configurable in the `logger-config.json` file in the root project directory.
