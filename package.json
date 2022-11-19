@@ -2,7 +2,7 @@
   "name": "tplink-monitor",
   "version": "0.1.0",
   "description": "An energy monitoring dashboard for TP-Link smart plugs",
-  "repository": "https://github.com/jamesbarnett91/tplink-monitor",
+  "repository": "https://github.com/lumpi2k/tplink-energy-monitor",
   "license": "GPL-3.0",
   "author": {
     "name": "James Barnett"
@@ -11,10 +11,14 @@
     {
       "name": "Hannes Reinberger",
       "url": "https://hannesreinberger.de"
-  }
+    }
   ],
   "nodemonConfig": {
-    "ignore": ["*-log.json", ".git", "node_modules/**/node_modules"],
+    "ignore": [
+      "logs/",
+      ".git",
+      "node_modules/**/node_modules"
+    ],
     "delay": 2500
   },
   "scripts": {
@@ -37,7 +41,9 @@
     "tplink-smarthome-api": "4.2.0"
   },
   "devDependencies": {
-    "pkg": "5.8.0"
+    "eslint": "^8.28.0",
+    "pkg": "5.8.0",
+    "prettier": "^2.7.1"
   },
   "bin": {
     "tplink-monitor": "./app.js"
