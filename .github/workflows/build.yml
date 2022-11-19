@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['19', 'latest', 'lts/*']
+        node: ['latest', 'lts/*']
     steps:
       - name: Checkout
         uses: actions/checkout@v3
