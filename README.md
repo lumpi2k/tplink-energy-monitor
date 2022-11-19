@@ -24,14 +24,14 @@ This project was originally written by [James Barnett](https://github.com/jamesb
 You can use any of the following methods to get the project running:
 
 ## Docker Compose
-1. Check out the code on your machine.
+### 1. Check out the code on your machine.
 
 ```sh
 $ git clone https://github.com/lumpi2k/tplink-energy-monitor.git
 $ cd tplink-energy-monitor
 ```
 
-2. copy the .env.example and create your own .env
+### 2. copy the .env.example and create your own .env
 
 The ``.env`` file stores the port your app will be reachable and your current price per kWh, if you want to use the energy cost feature.
 
@@ -39,13 +39,13 @@ The ``.env`` file stores the port your app will be reachable and your current pr
 $ cp .env.example .env
 $ nano .env
 ```
-3. Use docker compose to build a docker image on your machine and run it
+### 3. Use docker compose to build a docker image on your machine and run it
 
 ```sh
 $ docker compose build && docker compose up -d
 ```
 
-4. Access the App in your browser
+### 4. Access the App in your browser
 
 The app will be available on the prot you specified in your .env on your server.
 
