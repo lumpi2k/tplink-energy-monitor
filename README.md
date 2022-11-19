@@ -105,4 +105,5 @@ If you hit this issue you can try disabling the VirtualBox adapter in `Control P
 
 # TODOs
 - [ ] Show cumulative energy usage from all devices
-- [ ] Add daily cost metrics
+- [x] Add daily cost metrics
+- [ ] Build package for distribution via docker hub
