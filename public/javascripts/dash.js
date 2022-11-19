@@ -1,5 +1,3 @@
-let price = 0.2467;
-
 var dash = {
   deviceId: null,
 
@@ -10,6 +8,7 @@ var dash = {
   dailyUsageChart: null,
   monthlyUsageChart: null,
   usageLogChart: null,
+  price: null,
 
   init: function(deviceId) {
     this.deviceId = deviceId;
@@ -28,7 +27,6 @@ var dash = {
   },
 
   initWsConnection: function() {
-//    var wsUri = 'ws://' + window.location.host + '/ws'
     var scheme = window.location.protocol === 'https:' ? 'wss://' : 'ws://';
     var wsUri = scheme + window.location.host + '/ws';
 
@@ -55,6 +53,7 @@ var dash = {
 
   wsMessageHandler: function(messageEvent) {
     let message = JSON.parse(messageEvent.data);
+    price = message.price;
     if(message.deviceId === dash.deviceId) {
       if(message.dataType === 'realtimeUsage') {
         dash.refreshRealtimeDisplay(message.data);

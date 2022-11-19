@@ -1,4 +1,5 @@
 const app = require('../app');
+require('dotenv').config()
 
 function broadcastRealtimeUsageUpdate(deviceId, data) {
   broadcast(generatePayload('realtimeUsage', deviceId, data));
@@ -31,7 +32,8 @@ function generatePayload(dataType, deviceId, data) {
   let payload = {
     dataType: dataType,
     deviceId: deviceId,
-    data: data
+    data: data,
+    price: process.env.PRICE
   }
 
   return JSON.stringify(payload);
