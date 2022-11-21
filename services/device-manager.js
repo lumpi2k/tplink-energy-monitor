@@ -11,18 +11,18 @@ function startDiscovery(bindAddress) {
     deviceTypes: ['plug'],
     address: bindAddress,
     discoveryTimeout: 20000
-  }).on('plug-new', registerPlug);  
+  }).on('plug-new', registerPlug);
 }
 
 Object.keys(interfaces)
   .reduce((results, name) => results.concat(interfaces[name]), [])
-  .filter((iface) => iface.family === 'IPv4' && !iface.internal)
+  .filter((iface) => (iface.family === 4 || iface.family === "IPv4") && !iface.internal)
   .map((iface) => iface.address)
   .map(startDiscovery);
 
 
 function registerPlug(plug) {
-  
+
   if (plug.supportsEmeter) {
     console.log('Found device with energy monitor support: ' + plug.alias + ' [' + plug.deviceId + ']');
     devices.push(plug);
@@ -30,7 +30,7 @@ function registerPlug(plug) {
   } else {
     console.log('Skipping device: ' + plug.alias + ' [' + plug.deviceId + ']. Energy monitoring not supported.');
   }
-  
+
 }
 
 module.exports.getDevice = function(deviceId) {
